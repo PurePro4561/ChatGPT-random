@@ -1,25 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My Games Website</title>
+	<title>My Chatbot</title>
+	<style>
+		.container {
+			border: 2px solid #ccc;
+			border-radius: 5px;
+			padding: 10px;
+			margin: 10px;
+			width: 500px;
+			height: 400px;
+			overflow-y: scroll;
+		}
+		.input-container {
+			display: flex;
+			margin-top: 10px;
+		}
+		.input-container input[type="text"] {
+			flex: 1;
+			padding: 5px;
+			border-radius: 5px;
+			border: 2px solid #ccc;
+			margin-right: 5px;
+		}
+		.input-container input[type="submit"] {
+			padding: 5px;
+			border-radius: 5px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
-	<h1>Welcome to My Games Website!</h1>
-	<div class="game-buttons">
-		<button onclick="startGame('game1.html')">
-			<img src="game1.jpg" alt="Game 1">
-		</button>
-		<button onclick="startGame('game2.html')">
-			<img src="game2.jpg" alt="Game 2">
-		</button>
-		<button onclick="startGame('game3.html')">
-			<img src="game3.jpg" alt="Game 3">
-		</button>
-		<!-- Repeat for all 50 games -->
+	<h1>My Chatbot</h1>
+	<div class="container" id="chat-container">
+		<p>Welcome to My Chatbot! How can I assist you today?</p>
+	</div>
+	<div class="input-container">
+		<input type="text" id="user-input">
+		<input type="submit" value="Send" onclick="sendMessage()">
 	</div>
 	<script>
-		function startGame(url) {
-			window.location.href = url;
+		function sendMessage() {
+			var userInput = document.getElementById("user-input").value;
+			var chatContainer = document.getElementById("chat-container");
+			var newMessage = document.createElement("p");
+			newMessage.innerHTML = "You: " + userInput;
+				if (userInput.includes("hello")) {
+					newMessage.innerHTML += "<br>Bot: Hello there!";
+				} else if (userInput.includes("goodbye")) {
+					newMessage.innerHTML += "<br>Bot: Goodbye! Have a great day.";
+				} else {
+					newMessage.innerHTML += "<br>Bot: I'm sorry, I don't understand.";
+				}
+			chatContainer.appendChild(newMessage);
+			document.getElementById("user-input").value = "";
+			chatContainer.scrollTop = chatContainer.scrollHeight;
 		}
 	</script>
 </body>
